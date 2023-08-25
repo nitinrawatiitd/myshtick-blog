@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>All Posts - My New Hugo Site</title>
+        <link>http://example.org/posts/</link>
+        <description>All Posts | My New Hugo Site</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 24 Aug 2023 14:09:17 &#43;0530</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Attention and Transformers</title>
+    <link>http://example.org/posts/attention-and-transformers/</link>
+    <pubDate>Thu, 24 Aug 2023 14:09:17 &#43;0530</pubDate>
+    <author>Nitin</author>
+    <guid>http://example.org/posts/attention-and-transformers/</guid>
+    <description><![CDATA[Attention is all you Need was a landmark paper that changed the face of the NLP landscape. They are what power todays large scale LLMs - that have generated all the hype, most of which is merited.
+This post is meant to develop a deeper understanding of the underlying concepts of the attention mechanism and the transformer architecture.
+Attention Source: https://d2l.ai/chapter_attention-mechanisms-and-transformers
+Simply consider the following: denote by $\mathcal{D} \stackrel{\textrm{def}}{=} {(\mathbf{k}_1, \mathbf{v}_1), \ldots (\mathbf{k}_m, \mathbf{v}_m)}$ a database of $m$ tuples of keys and values.]]></description>
+</item>
+</channel>
+</rss>
