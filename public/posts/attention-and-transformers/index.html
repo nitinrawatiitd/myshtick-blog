@@ -33,7 +33,7 @@ Simply consider the following: denote by $\mathcal{D} \stackrel{\textrm{def}}{=}
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/posts\/attention-and-transformers\/"
-        },"genre": "posts","wordcount":  411 ,
+        },"genre": "posts","wordcount":  391 ,
         "url": "http:\/\/example.org\/posts\/attention-and-transformers\/","datePublished": "2023-08-24T14:09:17+05:30","dateModified": "2023-08-24T14:09:17+05:30","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -107,7 +107,7 @@ Simply consider the following: denote by $\mathcal{D} \stackrel{\textrm{def}}{=}
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Attention and Transformers</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Nitin</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-24">2023-08-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;411 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-24">2023-08-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;391 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -137,7 +137,17 @@ Simply consider the following: denote by $\mathcal{D} \stackrel{\textrm{def}}{=}
 <p>$$\alpha(\mathbf{q}, \mathbf{k}_i) = \frac{\alpha(\mathbf{q}, \mathbf{k}_i)}{{\sum_j} \alpha(\mathbf{q}, \mathbf{k}_j)}$$</p>
 <p>In particular, to ensure that the weights are also nonnegative, one can resort to exponentiation. This means that we can now pick <em>any</em> function  $a(\mathbf{q}, \mathbf{k})$ and then apply the softmax operation used for multinomial models to it via</p>
 <p>$$\alpha(\mathbf{q}, \mathbf{k}_i) = \frac{\exp(a(\mathbf{q}, \mathbf{k}_i))}{\sum_j \exp(a(\mathbf{q}, \mathbf{k}_j))}$$</p>
-<p>This operation is readily available in all deep learning frameworks. It is differentiable and its gradient never vanishes, all of which are desirable properties in a model. Note though, the attention mechanism introduced above is not the only option</p>
+<p>It is differentiable and its gradient never vanishes, all of which are desirable properties in a model.</p>
+<p><figure><a class="lightgallery" href="/img/where-wally-walker-books.jpg" title="Alt text here" data-thumbnail="/img/where-wally-walker-books.jpg" data-sub-html="<h2>Title here</h2><p>Alt text here</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/where-wally-walker-books.jpg"
+            data-srcset="/img/where-wally-walker-books.jpg, /img/where-wally-walker-books.jpg 1.5x, /img/where-wally-walker-books.jpg 2x"
+            data-sizes="auto"
+            alt="/img/where-wally-walker-books.jpg" />
+    </a><figcaption class="image-caption">Title here</figcaption>
+    </figure></p>
 <h2 id="transformer">Transformer</h2>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
