@@ -61,3 +61,5 @@ There are many more choices that we could pick. All of the kernels are heuristic
 $$f(\mathbf{q}) = \sum_i \mathbf{v}_i \frac{\alpha(\mathbf{q}, \mathbf{k}_i)}{\sum_j \alpha(\mathbf{q}, \mathbf{k}_j)}.$$
 
 One of the convenient properties of this estimator is that it requires no training. Even more so, if we suitably narrow the kernel with increasing amounts of data, the approach is consistent (Mack and Silverman, 1982), i.e., it will converge to some statistically optimal solution. Let’s start by inspecting some kernels.
+
+![](/img/kernels.png "Common kernels for Nadaraya–Watson Regression")
