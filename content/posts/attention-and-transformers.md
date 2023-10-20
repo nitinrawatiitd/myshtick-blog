@@ -2,6 +2,7 @@
 title: "Attention and Transformers"
 date: 2023-08-24
 author: Nitin
+tags: [llm]
 ---
 
 [Attention is all you Need](https://arxiv.org/abs/1706.03762) was a landmark paper that changed the face of the NLP landscape. They are what power todays large scale LLMs - that have generated all the hype, most of which is merited.

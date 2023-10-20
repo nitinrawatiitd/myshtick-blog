@@ -1,20 +1,9 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>All Posts - My New Hugo Site</title>
-        <link>http://example.org/posts/</link>
-        <description>All Posts | My New Hugo Site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 16 Oct 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>Notes on Stable Diffusion</title>
-    <link>http://example.org/posts/stable-diffusion/</link>
-    <pubDate>Mon, 16 Oct 2023 00:00:00 &#43;0000</pubDate>
-    <author>Nitin</author>
-    <guid>http://example.org/posts/stable-diffusion/</guid>
-    <description><![CDATA[It is not just the LLMs that are all the rage nowadays. Text to image models have also become super powerful and useful. This page attempts to capture some of the concepts involed in the udnerlying method - stable diffusion.
-Overview Sources:
-https://stable-diffusion-art.com/comfyui/ https://towardsdatascience.com/the-arrival-of-sdxl-1-0-4e739d5cc6c7 A Stable Diffusion model has three main parts:
-MODEL: The noise predictor model in the latent space. CLIP: The language model preprocesses the positive and the negative prompts.]]></description>
-</item>
-<item>
+        <title>llm - Tag - My New Hugo Site</title>
+        <link>http://example.org/tags/llm/</link>
+        <description>llm - Tag - My New Hugo Site</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 23 Sep 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/llm/" rel="self" type="application/rss+xml" /><item>
     <title>Good intuitions about LLMs</title>
     <link>http://example.org/posts/good-llm-intuitions/</link>
     <pubDate>Sat, 23 Sep 2023 00:00:00 &#43;0000</pubDate>
@@ -23,26 +12,6 @@ MODEL: The noise predictor model in the latent space. CLIP: The language model p
     <description><![CDATA[These few intuitions about LLMs at scale and training are helpful
 Note: These notes are from presentation by Hyung Won Chung, Research Scientist at OpenAI.
 talk: https://youtu.be/dbo3kNKPaUA?feature=shared slides: https://docs.google.com/presentation/d/1636wKStYdT_yRPbJNrf8MLKpQghuWGDmyHinHhAKeXY/edit#slide=id.g2885e521b53_0_0 Some abilities emerge with scale It has been observed that some capabilities only appear after a certain point in scale. Emergent abilities in large language models (Jason Wei, Yi Tay, Rishi Bommasani, Colin Raffel, Barret Zoph et al. (2022)) In gen ai space, it could appear that an idea doesn&rsquo;t work, but that could be just it doesn&rsquo;t work &ldquo;yet&rdquo;.]]></description>
-</item>
-<item>
-    <title>Paper Read</title>
-    <link>http://example.org/posts/research-papers-read/</link>
-    <pubDate>Sat, 23 Sep 2023 00:00:00 &#43;0000</pubDate>
-    <author>Nitin</author>
-    <guid>http://example.org/posts/research-papers-read/</guid>
-    <description><![CDATA[The blog contains a summary of each research paper I have recently read and found interesting.
-LLM as optimisers (Google) They propose Optimization by PROmpting (OPRO), a simple and effective approach to leverage large language models (LLMs) as optimizers, where the optimization task is described in natural language. They show how linear regression and travelling salesman problem can be framed using text and the LLM does a decent job at arriving at the solution.]]></description>
-</item>
-<item>
-    <title>What is great about Mandalorian Season 2</title>
-    <link>http://example.org/posts/mandalorian/</link>
-    <pubDate>Sat, 23 Sep 2023 00:00:00 &#43;0000</pubDate>
-    <author>Nitin</author>
-    <guid>http://example.org/posts/mandalorian/</guid>
-    <description><![CDATA[There are a few themes that resonated with me when I watched Mandalorian season 2, almost 3 years ago.
-Already like the music and the use of the &ldquo;volume&rdquo; technology.
-The politics Many people don&rsquo;t like the prequels because of too much politics, But I do. The one with Bill Burr, touches upon many interesting themes -
-The new republic or the empire, the planets in the outer rim are both ignored The blind faith in one&rsquo;s well, faith.]]></description>
 </item>
 <item>
     <title>Detecting machine generated text</title>

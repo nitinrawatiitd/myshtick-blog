@@ -2,7 +2,7 @@
 title: "What is great about Mandalorian Season 2"
 date: 2023-09-23
 author: Nitin
-tags: [moving-pictures, tv-show]
+tags: [moving-pictures, art]
 ---
 
 There are a few themes that resonated with me when I watched Mandalorian season 2, almost 3 years ago.

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>papers - Tag - My New Hugo Site</title>
+        <link>http://example.org/tags/papers/</link>
+        <description>papers - Tag - My New Hugo Site</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 23 Sep 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/papers/" rel="self" type="application/rss+xml" /><item>
+    <title>Paper Read</title>
+    <link>http://example.org/posts/research-papers-read/</link>
+    <pubDate>Sat, 23 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>Nitin</author>
+    <guid>http://example.org/posts/research-papers-read/</guid>
+    <description><![CDATA[The blog contains a summary of each research paper I have recently read and found interesting.
+LLM as optimisers (Google) They propose Optimization by PROmpting (OPRO), a simple and effective approach to leverage large language models (LLMs) as optimizers, where the optimization task is described in natural language. They show how linear regression and travelling salesman problem can be framed using text and the LLM does a decent job at arriving at the solution.]]></description>
+</item>
+</channel>
+</rss>

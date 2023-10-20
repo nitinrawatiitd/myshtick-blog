@@ -3,5 +3,45 @@
         <title>Tags - Tag - My New Hugo Site</title>
         <link>http://example.org/tags/</link>
         <description>Tags - Tag - My New Hugo Site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://example.org/tags/" rel="self" type="application/rss+xml" /></channel>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 16 Oct 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>stable-diffusion</title>
+    <link>http://example.org/tags/stable-diffusion/</link>
+    <pubDate>Mon, 16 Oct 2023 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/tags/stable-diffusion/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>art</title>
+    <link>http://example.org/tags/art/</link>
+    <pubDate>Sat, 23 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/tags/art/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>llm</title>
+    <link>http://example.org/tags/llm/</link>
+    <pubDate>Sat, 23 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/tags/llm/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>moving-pictures</title>
+    <link>http://example.org/tags/moving-pictures/</link>
+    <pubDate>Sat, 23 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/tags/moving-pictures/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>papers</title>
+    <link>http://example.org/tags/papers/</link>
+    <pubDate>Sat, 23 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>http://example.org/tags/papers/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
 </rss>

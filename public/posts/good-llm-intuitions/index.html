@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Good intuitions about LLMs - My New Hugo Site</title><meta name="Description" content="Distilling concepts"><meta property="og:title" content="Good intuitions about LLMs" />
+<meta property="og:description" content="These few intuitions about LLMs at scale and training are helpful
+Note: These notes are from presentation by Hyung Won Chung, Research Scientist at OpenAI.
+talk: https://youtu.be/dbo3kNKPaUA?feature=shared slides: https://docs.google.com/presentation/d/1636wKStYdT_yRPbJNrf8MLKpQghuWGDmyHinHhAKeXY/edit#slide=id.g2885e521b53_0_0 Some abilities emerge with scale It has been observed that some capabilities only appear after a certain point in scale. Emergent abilities in large language models (Jason Wei, Yi Tay, Rishi Bommasani, Colin Raffel, Barret Zoph et al. (2022)) In gen ai space, it could appear that an idea doesn&rsquo;t work, but that could be just it doesn&rsquo;t work &ldquo;yet&rdquo;." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/good-llm-intuitions/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-23T00:00:00+00:00" /><meta property="og:site_name" content="MyShtick" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Good intuitions about LLMs"/>
+<meta name="twitter:description" content="These few intuitions about LLMs at scale and training are helpful
+Note: These notes are from presentation by Hyung Won Chung, Research Scientist at OpenAI.
+talk: https://youtu.be/dbo3kNKPaUA?feature=shared slides: https://docs.google.com/presentation/d/1636wKStYdT_yRPbJNrf8MLKpQghuWGDmyHinHhAKeXY/edit#slide=id.g2885e521b53_0_0 Some abilities emerge with scale It has been observed that some capabilities only appear after a certain point in scale. Emergent abilities in large language models (Jason Wei, Yi Tay, Rishi Bommasani, Colin Raffel, Barret Zoph et al. (2022)) In gen ai space, it could appear that an idea doesn&rsquo;t work, but that could be just it doesn&rsquo;t work &ldquo;yet&rdquo;."/>
+<meta name="application-name" content="MyShtick">
+<meta name="apple-mobile-web-app-title" content="MyShtick"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/good-llm-intuitions/" /><link rel="prev" href="http://example.org/posts/research-papers-read/" /><link rel="next" href="http://example.org/posts/stable-diffusion/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Good intuitions about LLMs",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/good-llm-intuitions\/"
+        },"genre": "posts","keywords": "llm","wordcount":  779 ,
+        "url": "http:\/\/example.org\/posts\/good-llm-intuitions\/","datePublished": "2023-09-23T00:00:00+00:00","dateModified": "2023-09-23T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Nitin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="My New Hugo Site">MyShtick</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="My New Hugo Site">MyShtick</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Good intuitions about LLMs</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Nitin</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-23">2023-09-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;779 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#some-abilities-emerge-with-scale">Some abilities emerge with scale</a></li>
+    <li><a href="#how-is-the-scaling-actually-done">How is the scaling actually done?</a></li>
+    <li><a href="#training-the-model">Training the model</a>
+      <ul>
+        <li><a href="#instruction-fine-tuning">Instruction fine tuning</a></li>
+        <li><a href="#rlhf">RLHF</a></li>
+        <li><a href="#why-should-we-keep-studying-rlhf">Why should we keep studying RLHF?</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>These few intuitions about LLMs at scale and training are helpful</p>
+<p>Note: These notes are from presentation by Hyung Won Chung, Research Scientist at OpenAI.</p>
+<ul>
+<li>talk: <a href="https://youtu.be/dbo3kNKPaUA?feature=shared" target="_blank" rel="noopener noreffer ">https://youtu.be/dbo3kNKPaUA?feature=shared</a></li>
+<li>slides: <a href="https://docs.google.com/presentation/d/1636wKStYdT_yRPbJNrf8MLKpQghuWGDmyHinHhAKeXY/edit#slide=id.g2885e521b53_0_0" target="_blank" rel="noopener noreffer ">https://docs.google.com/presentation/d/1636wKStYdT_yRPbJNrf8MLKpQghuWGDmyHinHhAKeXY/edit#slide=id.g2885e521b53_0_0</a></li>
+</ul>
+<h2 id="some-abilities-emerge-with-scale">Some abilities emerge with scale</h2>
+<p>It has been observed that some capabilities only appear after a certain point in scale.
+<figure><a class="lightgallery" href="/img/emergent_abilities_llms.png" title="/img/emergent_abilities_llms.png" data-thumbnail="/img/emergent_abilities_llms.png" data-sub-html="<h2>Emergent abilities in large language models (Jason Wei, Yi Tay, Rishi Bommasani, Colin Raffel, Barret Zoph et al. (2022))</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/emergent_abilities_llms.png"
+            data-srcset="/img/emergent_abilities_llms.png, /img/emergent_abilities_llms.png 1.5x, /img/emergent_abilities_llms.png 2x"
+            data-sizes="auto"
+            alt="/img/emergent_abilities_llms.png" />
+    </a><figcaption class="image-caption">Emergent abilities in large language models (Jason Wei, Yi Tay, Rishi Bommasani, Colin Raffel, Barret Zoph et al. (2022))</figcaption>
+    </figure></p>
+<p>In gen ai space, it could appear that an idea doesn&rsquo;t work, but that could be just it doesn&rsquo;t work &ldquo;yet&rdquo;. Need to constant learn and unlearn. Many ideas get outdated and invalidated at larger scale. We need to constantly unlearn intuitions built on such invalidated ideas. With less to unlearn, newcomers can have advantages over more experienced ones. This is an interesting neutralizing force.</p>
+<p>So, to stay ahead of the scaling curve:</p>
+<ul>
+<li>Document experiments that failed because of insufficient “intelligence”</li>
+<li>Do not declare failure yet and make it easy to rerun in the future</li>
+<li>As soon as the new model comes out, rerun them</li>
+<li>Learn what works and what doesn’t</li>
+<li>Update your intuition on emergent abilities and scale</li>
+</ul>
+<h2 id="how-is-the-scaling-actually-done">How is the scaling actually done?</h2>
+<p>All LLMs so far use Transformer architecture.</p>
+<p>From first-principles view:</p>
+<ul>
+<li>Scaling Transformer means efficiently doing matmuls with many machines</li>
+<li>This involves distributing all the matrices (or arrays) involved in the Transformer layer to various machines</li>
+<li>Do so while minimizing the communication between machines</li>
+</ul>
+<p>Matrix multiplication mapped to multiple machines
+<figure><a class="lightgallery" href="/img/matmul_multi.png" title="/img/matmul_multi.png" data-thumbnail="/img/matmul_multi.png" data-sub-html="<h2>Matrix multiplication on multiple machines</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/matmul_multi.png"
+            data-srcset="/img/matmul_multi.png, /img/matmul_multi.png 1.5x, /img/matmul_multi.png 2x"
+            data-sizes="auto"
+            alt="/img/matmul_multi.png" />
+    </a><figcaption class="image-caption">Matrix multiplication on multiple machines</figcaption>
+    </figure></p>
+<p>Let&rsquo;s focus on what machine does
+<figure><a class="lightgallery" href="/img/matmul_one.png" title="/img/matmul_one.png" data-thumbnail="/img/matmul_one.png" data-sub-html="<h2>Matrix multiplication on multiple machines</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/matmul_one.png"
+            data-srcset="/img/matmul_one.png, /img/matmul_one.png 1.5x, /img/matmul_one.png 2x"
+            data-sizes="auto"
+            alt="/img/matmul_one.png" />
+    </a><figcaption class="image-caption">Matrix multiplication on multiple machines</figcaption>
+    </figure></p>
+<p>The code for the attention layers, where most of the matmul happens, needs to be written in a way so as to take advantage of parallel matmuls. That hardware to axis mapping defines parallelism.</p>
+<p>Iteration on pre-training is very expensive and scaling to the largest scale ever is very, very hard. Problems can happen and every hour you don&rsquo;t make a decision, you are making expensive hardware lie idle.</p>
+<h2 id="training-the-model">Training the model</h2>
+<p>Scaling doesn’t solve all problems. We also need post-training</p>
+<p>We can’t talk to the pretrained model directly. Pre-trained models always generate something that is a natural continuation of the prompts even if the prompts are malicious</p>
+<p><figure><a class="lightgallery" href="/img/pretrained_vs_instructiontuned.png" title="/img/pretrained_vs_instructiontuned.png" data-thumbnail="/img/pretrained_vs_instructiontuned.png" data-sub-html="<h2>Pretrained vs instructiontuned</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/pretrained_vs_instructiontuned.png"
+            data-srcset="/img/pretrained_vs_instructiontuned.png, /img/pretrained_vs_instructiontuned.png 1.5x, /img/pretrained_vs_instructiontuned.png 2x"
+            data-sizes="auto"
+            alt="/img/pretrained_vs_instructiontuned.png" />
+    </a><figcaption class="image-caption">Pretrained vs instructiontuned</figcaption>
+    </figure></p>
+<p>So to address the limitations of a simple pretrained model, there are some post training steps that you can do -
+<figure><a class="lightgallery" href="/img/post_training_steps.png" title="/img/post_training_steps.png" data-thumbnail="/img/post_training_steps.png" data-sub-html="<h2>Post training steps</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/post_training_steps.png"
+            data-srcset="/img/post_training_steps.png, /img/post_training_steps.png 1.5x, /img/post_training_steps.png 2x"
+            data-sizes="auto"
+            alt="/img/post_training_steps.png" />
+    </a><figcaption class="image-caption">Post training steps</figcaption>
+    </figure></p>
+<h3 id="instruction-fine-tuning">Instruction fine tuning</h3>
+<p>Frame all tasks in the form of (natural language instruction) -&gt; (natural language response) mapping. The great thing about this formalisation is that it can be used for any kind of task, unrelated even. This symbolises the true benefit of LLMs - they are not built for one task like in traditional machine learning, they can do multiple things.</p>
+<p>So for an unseen task, the model just needs to respond to the natural language instruction.
+<figure><a class="lightgallery" href="/img/unified_tasks_instruction_tuning.png" title="/img/unified_tasks_instruction_tuning.png" data-thumbnail="/img/unified_tasks_instruction_tuning.png" data-sub-html="<h2>Unified tasks in instruction tuning</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/unified_tasks_instruction_tuning.png"
+            data-srcset="/img/unified_tasks_instruction_tuning.png, /img/unified_tasks_instruction_tuning.png 1.5x, /img/unified_tasks_instruction_tuning.png 2x"
+            data-sizes="auto"
+            alt="/img/unified_tasks_instruction_tuning.png" />
+    </a><figcaption class="image-caption">Unified tasks in instruction tuning</figcaption>
+    </figure></p>
+<p>Scaling the number of tasks and model size improves the performance.
+<figure><a class="lightgallery" href="/img/intructiontuning_scaling.png" title="/img/intructiontuning_scaling.png" data-thumbnail="/img/intructiontuning_scaling.png" data-sub-html="<h2>Scaling of intruction tuning</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/intructiontuning_scaling.png"
+            data-srcset="/img/intructiontuning_scaling.png, /img/intructiontuning_scaling.png 1.5x, /img/intructiontuning_scaling.png 2x"
+            data-sizes="auto"
+            alt="/img/intructiontuning_scaling.png" />
+    </a><figcaption class="image-caption">Scaling of intruction tuning</figcaption>
+    </figure></p>
+<p>Instruction fine-tuning is highly effective but it has inherent limitations. That is where the next step come in</p>
+<h3 id="rlhf">RLHF</h3>
+<p>Suppose the input to an LLM is:
+Write a letter to a 5-year-old boy from Santa Clause explaining that Santa is not real. Convey gently so as not to break his heart</p>
+<p>What should the output be? There is no single correct answer.</p>
+<p>So the observations are:</p>
+<ul>
+<li>Increasingly we want to teach models more abstract behaviors</li>
+<li>Objective function of instruction finetuning seems to be the “bottleneck” of teaching these behaviors</li>
+<li>The maximum likelihood objective is “predefined” function (i.e. no learnable parameter)</li>
+<li>Can we parameterize the objective function and learn it?</li>
+</ul>
+<p>In RL, we try to maximize the expected reward function. Reward is the objective function. We can learn the reward: reward model.We know how to do supervised learning with neural network well. Let’s use neural net to represent the reward model.</p>
+<p>Reward Model (RM) training data: which completion is better? Humans label which completion is preferred. This setup aims to align models to the human preference.
+<figure><a class="lightgallery" href="/img/rm_data.png" title="/img/rm_data.png" data-thumbnail="/img/rm_data.png" data-sub-html="<h2>Data for reward model</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/rm_data.png"
+            data-srcset="/img/rm_data.png, /img/rm_data.png 1.5x, /img/rm_data.png 2x"
+            data-sizes="auto"
+            alt="/img/rm_data.png" />
+    </a><figcaption class="image-caption">Data for reward model</figcaption>
+    </figure></p>
+<p>Once we have a reward model, we can use it in RL to learn the language model parameters that maximizes the expected reward. We can use policy gradient algorithms such as PPO to compute the gradients and update the model parameters.</p>
+<h3 id="why-should-we-keep-studying-rlhf">Why should we keep studying RLHF?</h3>
+<p>RLHF is natural next step in the evolution of machine learning models. If something is so principled, we should keep at it until it works.</p>
+<p>This diagram helps capture that evolution. Super useful to understand where supervised fine tuned model (GPT-3) ends in supervised learning and where the RLHF comes into figure (InstructGPT and newer versions of GPT)
+<figure><a class="lightgallery" href="/img/ml_progress.png" title="/img/ml_progress.png" data-thumbnail="/img/ml_progress.png" data-sub-html="<h2>Progress of machine learning</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/ml_progress.png"
+            data-srcset="/img/ml_progress.png, /img/ml_progress.png 1.5x, /img/ml_progress.png 2x"
+            data-sizes="auto"
+            alt="/img/ml_progress.png" />
+    </a><figcaption class="image-caption">Progress of machine learning</figcaption>
+    </figure></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-09-23</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/good-llm-intuitions/" data-title="Good intuitions about LLMs" data-hashtags="llm"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/good-llm-intuitions/" data-hashtag="llm"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://example.org/posts/good-llm-intuitions/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://example.org/posts/good-llm-intuitions/" data-title="Good intuitions about LLMs" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/llm/">llm</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/research-papers-read/" class="prev" rel="prev" title="Paper Read"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Paper Read</a>
+            <a href="/posts/stable-diffusion/" class="next" rel="next" title="Notes on Stable Diffusion">Notes on Stable Diffusion<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.117.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

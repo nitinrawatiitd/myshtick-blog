@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Notes on Stable Diffusion - My New Hugo Site</title><meta name="Description" content="Distilling concepts"><meta property="og:title" content="Notes on Stable Diffusion" />
+<meta property="og:description" content="It is not just the LLMs that are all the rage nowadays. Text to image models have also become super powerful and useful. This page attempts to capture some of the concepts involed in the udnerlying method - stable diffusion.
+Overview Sources:
+https://stable-diffusion-art.com/comfyui/ https://towardsdatascience.com/the-arrival-of-sdxl-1-0-4e739d5cc6c7 A Stable Diffusion model has three main parts:
+MODEL: The noise predictor model in the latent space. CLIP: The language model preprocesses the positive and the negative prompts." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/stable-diffusion/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-10-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-10-16T00:00:00+00:00" /><meta property="og:site_name" content="MyShtick" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Notes on Stable Diffusion"/>
+<meta name="twitter:description" content="It is not just the LLMs that are all the rage nowadays. Text to image models have also become super powerful and useful. This page attempts to capture some of the concepts involed in the udnerlying method - stable diffusion.
+Overview Sources:
+https://stable-diffusion-art.com/comfyui/ https://towardsdatascience.com/the-arrival-of-sdxl-1-0-4e739d5cc6c7 A Stable Diffusion model has three main parts:
+MODEL: The noise predictor model in the latent space. CLIP: The language model preprocesses the positive and the negative prompts."/>
+<meta name="application-name" content="MyShtick">
+<meta name="apple-mobile-web-app-title" content="MyShtick"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/stable-diffusion/" /><link rel="prev" href="http://example.org/posts/good-llm-intuitions/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Notes on Stable Diffusion",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/stable-diffusion\/"
+        },"genre": "posts","keywords": "stable-diffusion","wordcount":  117 ,
+        "url": "http:\/\/example.org\/posts\/stable-diffusion\/","datePublished": "2023-10-16T00:00:00+00:00","dateModified": "2023-10-16T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Nitin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="My New Hugo Site">MyShtick</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="My New Hugo Site">MyShtick</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Notes on Stable Diffusion</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Nitin</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-16">2023-10-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;117 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#history">History</a></li>
+    <li><a href="#popular-web-uis">Popular Web UIs</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>It is not just the LLMs that are all the rage nowadays. Text to image models have also become super powerful and useful. This page attempts to capture some of the concepts involed in the udnerlying method - stable diffusion.</p>
+<h2 id="overview">Overview</h2>
+<p>Sources:</p>
+<ul>
+<li><a href="https://stable-diffusion-art.com/comfyui/" target="_blank" rel="noopener noreffer ">https://stable-diffusion-art.com/comfyui/</a></li>
+<li><a href="https://towardsdatascience.com/the-arrival-of-sdxl-1-0-4e739d5cc6c7" target="_blank" rel="noopener noreffer ">https://towardsdatascience.com/the-arrival-of-sdxl-1-0-4e739d5cc6c7</a></li>
+</ul>
+<p>A Stable Diffusion model has three main parts:</p>
+<p>MODEL: The noise predictor model in the latent space.
+CLIP: The language model preprocesses the positive and the negative prompts.
+VAE: The Variational AutoEncoder converts the image between the pixel and the latent spaces.</p>
+<p>We&rsquo;ll focus on models from stability.ai. There are 2:</p>
+<p><strong>Stable diffusion 1.5 (and higher versions)</strong>
+<figure><a class="lightgallery" href="/img/SD1_5.webp" title="/img/SD1_5.webp" data-thumbnail="/img/SD1_5.webp" data-sub-html="<h2>Usual SD 1.5 generation pipeline</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/SD1_5.webp"
+            data-srcset="/img/SD1_5.webp, /img/SD1_5.webp 1.5x, /img/SD1_5.webp 2x"
+            data-sizes="auto"
+            alt="/img/SD1_5.webp" />
+    </a><figcaption class="image-caption">Usual SD 1.5 generation pipeline</figcaption>
+    </figure></p>
+<p><strong>SDXL</strong>
+<figure><a class="lightgallery" href="/img/SDXL.webp" title="/img/SDXL.webp" data-thumbnail="/img/SDXL.webp" data-sub-html="<h2>SDXL generation pipeline</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/img/SDXL.webp"
+            data-srcset="/img/SDXL.webp, /img/SDXL.webp 1.5x, /img/SDXL.webp 2x"
+            data-sizes="auto"
+            alt="/img/SDXL.webp" />
+    </a><figcaption class="image-caption">SDXL generation pipeline</figcaption>
+    </figure></p>
+<h2 id="history">History</h2>
+<h2 id="popular-web-uis">Popular Web UIs</h2>
+<ul>
+<li>ComfyUI</li>
+<li>Kohya</li>
+<li>Automatic1111</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-10-16</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/stable-diffusion/" data-title="Notes on Stable Diffusion" data-hashtags="stable-diffusion"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/stable-diffusion/" data-hashtag="stable-diffusion"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="http://example.org/posts/stable-diffusion/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://example.org/posts/stable-diffusion/" data-title="Notes on Stable Diffusion" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/stable-diffusion/">stable-diffusion</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/good-llm-intuitions/" class="prev" rel="prev" title="Good intuitions about LLMs"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Good intuitions about LLMs</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.117.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

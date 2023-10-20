@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>art - Tag - My New Hugo Site</title>
+        <link>http://example.org/tags/art/</link>
+        <description>art - Tag - My New Hugo Site</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 23 Sep 2023 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://example.org/tags/art/" rel="self" type="application/rss+xml" /><item>
+    <title>What is great about Mandalorian Season 2</title>
+    <link>http://example.org/posts/mandalorian/</link>
+    <pubDate>Sat, 23 Sep 2023 00:00:00 &#43;0000</pubDate>
+    <author>Nitin</author>
+    <guid>http://example.org/posts/mandalorian/</guid>
+    <description><![CDATA[There are a few themes that resonated with me when I watched Mandalorian season 2, almost 3 years ago.
+Already like the music and the use of the &ldquo;volume&rdquo; technology.
+The politics Many people don&rsquo;t like the prequels because of too much politics, But I do. The one with Bill Burr, touches upon many interesting themes -
+The new republic or the empire, the planets in the outer rim are both ignored The blind faith in one&rsquo;s well, faith.]]></description>
+</item>
+</channel>
+</rss>
