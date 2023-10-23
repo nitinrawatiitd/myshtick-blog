@@ -45,3 +45,26 @@ In this study they try to use special `<pause>`tokens at the time of both traini
     1. Paper - https://arxiv.org/pdf/2310.02226.pdf
     2. Code - Not available
     3. Benchmark data - GSM8k, SQuAD, CoQA etc
+
+## Llemma: An Open Language Model For Mathematics (Eulether)
+7B and 34B parameter llama models trained on Proof-Pile-2 data, a mixture of scientific papers, web data
+containing mathematics, and mathematical code, yielding LLEMMA. On the MATH benchmark LLEMMA outperforms all known open base models, as well as the unreleased Minerva model suite on an equi-parameter basis. Moreover, LLEMMA is capable of tool use and formal theorem proving without any further finetuning.
+    1. Paper - https://arxiv.org/pdf/2310.10631.pdf
+    2. Code - https://github.com/EleutherAI/math-lm
+    3. Benchmark data - Proof-Pile-2, https://github.com/EleutherAI/math-lm/tree/main/proof_pile_2
+
+## Self-RAG: Learning to Retrieve, Generate and Critique through Self-Reflection (University of Washington, IBM AI Research, Allen Institute for A)
+Self-RAG is a new framework that trains and controls an arbitrary LM through Self-reflection tokens. In particular, at every segment (e.g., sentence), Self-RAG can:
+    * Retrieve: Self-RAG first decodes a retrieval token to evaluate the utility of retrieval and control a retrieval component. If retrieval is required, our LM calls an external retrieval module to find top relevant documents, using input query and previous generation.
+    * Generate: If retrieval is not required, the model predicts the next output segment, as it does in a standard LM. If retrieval is needed, the model first generates generates critique token evaluating whether retrieved documents are relevant, and then generate continuation conditioned on the retrieved passages.
+    * Critique: If retrieval is required, the model further evaluates if passages support generation. Finally, a new critique token evaluates the overall utility of the response.
+
+Self-RAG outperforms vanilla ChatGPT or LLama2-chat across six tasks, and outperforms those SOTA models with widely-used retrieval-augmentation methods in most tasks by large margin
+    1. Paper - https://arxiv.org/abs/2310.11511
+    2. Code - https://github.com/AkariAsai/self-rag
+    3. Data - https://drive.google.com/drive/folders/18na_ayid-8NjPOd18vpDx8iBoyT3akSL?usp=share_link
+    4. Website - https://selfrag.github.io/
+
+
+
+
