@@ -54,7 +54,7 @@ containing mathematics, and mathematical code, yielding LLEMMA. On the MATH benc
     3. Benchmark data - Proof-Pile-2, https://github.com/EleutherAI/math-lm/tree/main/proof_pile_2
 
 ## Self-RAG: Learning to Retrieve, Generate and Critique through Self-Reflection (University of Washington, IBM AI Research, Allen Institute for A)
-Self-RAG is a new framework that trains and controls an arbitrary LM through Self-reflection tokens. In particular, at every segment (e.g., sentence), Self-RAG can:
+Self-RAG is a new framework that trains and controls an arbitrary LLM through Self-reflection tokens. In particular, at every segment (e.g., sentence), Self-RAG can:
     * Retrieve: Self-RAG first decodes a retrieval token to evaluate the utility of retrieval and control a retrieval component. If retrieval is required, our LM calls an external retrieval module to find top relevant documents, using input query and previous generation.
     * Generate: If retrieval is not required, the model predicts the next output segment, as it does in a standard LM. If retrieval is needed, the model first generates generates critique token evaluating whether retrieved documents are relevant, and then generate continuation conditioned on the retrieved passages.
     * Critique: If retrieval is required, the model further evaluates if passages support generation. Finally, a new critique token evaluates the overall utility of the response.
@@ -64,6 +64,81 @@ Self-RAG outperforms vanilla ChatGPT or LLama2-chat across six tasks, and outper
     2. Code - https://github.com/AkariAsai/self-rag
     3. Data - https://drive.google.com/drive/folders/18na_ayid-8NjPOd18vpDx8iBoyT3akSL?usp=share_link
     4. Website - https://selfrag.github.io/
+
+## Matryoshka Diffusion Models
+
+## Phind models
+
+## Chain-of-Table: Evolving Tables in the Reasoning Chain for Table Understanding:
+They conduct step-by-step reasoning as step-by-step tabular operations to form a chain of tables. The
+tables in the chain are the transformed tables by the tabular operations, representing the intermediate reasoning results. This procedure resemblesthe thought of reasoning in Chain-of-Thought. Achieves new state-of-the-art performance on WikiTQ, FeTaQA, and TabFact benchmarks across multiple LLM choices
+    1. Paper - https://arxiv.org/pdf/2401.04398.pdf
+    2. Code - https://github.com/wenhuchen/TableCoT/
+
+![](/img/Chain_of_tables.png "Chain of Tables Illustration")
+
+## Blending Is All You Need
+This paper and the code don't look fully developed. They talk about randomly using an LLM (from a group of LLMs) per token, and that apprently improves the generation. Not many people in reddit etc are fully convinced
+
+## Mixtral MoE
+I was more curious about the MoE approach of creating sparse models. The huggingface blog does a better job - https://huggingface.co/blog/moe
+
+To recap, in MoEs we replace every FFN layer of the transformer model with an MoE layer, which is composed of a gate network and a certain number of experts
+
+![](/img/00_switch_transformer.png "MoE layer from the [Switch Transformers paper](https://arxiv.org/abs/2101.03961)")
+
+Although MoEs provide benefits like efficient pretraining and faster inference compared to dense models, they also come with challenges:
+
+Training: MoEs enable significantly more compute-efficient pretraining, but they’ve historically struggled to generalize during fine-tuning, leading to overfitting.
+Inference: Although a MoE might have many parameters, only some of them are used during inference. This leads to much faster inference compared to a dense model with the same number of parameters. However, all parameters need to be loaded in RAM, so memory requirements are high. For example, given a MoE like Mixtral 8x7B, we’ll need to have enough VRAM to hold a dense 47B parameter model. Why 47B parameters and not 8 x 7B = 56B? That’s because in MoE models, only the FFN layers are treated as individual experts, and the rest of the model parameters are shared. At the same time, assuming just two experts are being used per token, the inference speed (FLOPs) is like using a 12B model (as opposed to a 14B model), because it computes 2x7B matrix multiplications, but with some layers shared (more on this soon).
+
+## Direct Preference Optimisation
+The paper is a long read. This video explains it succintly - https://www.youtube.com/watch?v=XZLc09hkMwA
+
+To recap, DPO is able to bypass both fitting an explicit reward and performing RL to learn the policy using
+a single maximum likelihood objective.
+
+Huggingface article about DPO and other alternatives:
+https://huggingface.co/blog/pref-tuning
+
+## Mamba - better than transformers?
+
+This paper proposes and alternative architecture based on the State Space Models. This discussion on reddit captures the essence of Mamba - https://www.reddit.com/r/MachineLearning/comments/190q1vb/d_so_mamba_vs_transformers_is_the_hype_real/
+
+How it is different from RNNS:
+* Mamba has a linear activation function between each hidden state, while LSTM and RNN have a nonlinearity, which makes backpropagation through time a lot more stable for Mamba.
+* Mamba can still be calculated in one forward pass through a parallel scan (prefix sum) operation, compared to e.g. RNNs and LSTMs where we need to calculate the previous timestep before we can calculate the next. The Mamba authors developed a hardware-aware algorithm in the same vein als FlashAttention which further improves efficiency.
+* The authors mention that RNNs without time-wise nonlinearities such as QRNN are the most similar to Mamba, but those do not use state expansion or selective B and C params, and they use a heuristic gating mechanism, while the parameterizations and initializations of Mamba are based on principled SSM theory.
+
+How it is different from Transformers?
+Unlike transformers, where attendtion looks at every step of the sequence, the Mamba models have concept of memory at every step that tries to use whatever information is relevant from the past and foreget whatever is not for the current token.
+
+A user commented that:
+
+The model will have been trained to use the potentially gigabytes of retained state information to store and forward the relevant information as needed.
+
+It’s just storing the history of the sequence in a far more efficient and highly structured way, and it will have been trained to very thoughtfully and efficiently retain recent information nearly perfectly and historical information if and when it may be relevant again or relates to recent information.
+
+Think of it like this:
+
+A transformer will need and work from the exact raw sequence data up to a history of N.
+
+The transformer must then truncate and completely 100% forget anything beyond N tokens ago.
+
+The state space model instead is efficiently encoding and storing the relevant information, and predicting what might still be relevant, so holding onto it.
+
+Also, because things that are still relevant are inherently related in some way, that means it can really cleverly and efficiently compress and store that history in an efficient and structured way.
+
+Another user commented:
+After reading the Mamba paper, attention feels like a hack to avoid engineering a memory representation. “We don’t know how to make the network remember the content of the previous tokens so let’s just feed all of them into it over and over.” Hence the quadratic scaling with context size: each new token depends on all previous tokens instead of a fixed-size state.
+
+Paper: https://arxiv.org/pdf/2312.00752.pdf
+
+
+
+
+
+
 
 
 
