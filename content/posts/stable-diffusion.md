@@ -60,7 +60,20 @@ There are 3 compenents to most stable diffusion models:
 
 ## Why do we remove noise iteratively?
 
+Visual way to understand the intuition behind why the denoising steps need to happen gradually and not in one go.
+
+![](/img/why_incremental_denoising.png "Source: Lesson 9A 2022 - Stable Diffusion deep dive")
+
+There are parallelss between the denoising in latent diffusion models and the gradient descent we have normally come to understand in the neural network models. Most of the tricks and methods used there can be used in stable diffusion as well.
+
 ## Classifier free guidance
+
+You'll often encounter the term classifier free guidance. What does it exactly mean?
+
+Source: https://sander.ai/2022/05/26/guidance.html
+
+## Use of blank text in diffusion models
+
 
 ## Popular models
 
