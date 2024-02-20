@@ -2,7 +2,7 @@
 title: "Notes on Stable Diffusion"
 date: 2023-10-16
 author: Nitin
-tags: [stable-diffusion][vision]
+tags: [stable-diffusion]
 ---
 
 It is not just the LLMs that are all the rage nowadays. Text to image models have also become super powerful and useful. This page attempts to capture some of the concepts involed in the udnerlying method - stable diffusion.
