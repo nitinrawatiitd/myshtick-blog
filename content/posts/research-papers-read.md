@@ -107,11 +107,11 @@ This paper proposes and alternative architecture based on the State Space Models
 
 How it is different from RNNS:
 * Mamba has a linear activation function between each hidden state, while LSTM and RNN have a nonlinearity, which makes backpropagation through time a lot more stable for Mamba.
-* Mamba can still be calculated in one forward pass through a parallel scan (prefix sum) operation, compared to e.g. RNNs and LSTMs where we need to calculate the previous timestep before we can calculate the next. The Mamba authors developed a hardware-aware algorithm in the same vein als FlashAttention which further improves efficiency.
+* Mamba can still be calculated in one forward pass through a parallel scan (prefix sum) operation, compared to e.g. RNNs and LSTMs where we need to calculate the previous timestep before we can calculate the next. The Mamba authors developed a hardware-aware algorithm in the same vein as FlashAttention which further improves efficiency.
 * The authors mention that RNNs without time-wise nonlinearities such as QRNN are the most similar to Mamba, but those do not use state expansion or selective B and C params, and they use a heuristic gating mechanism, while the parameterizations and initializations of Mamba are based on principled SSM theory.
 
 How it is different from Transformers?
-Unlike transformers, where attendtion looks at every step of the sequence, the Mamba models have concept of memory at every step that tries to use whatever information is relevant from the past and foreget whatever is not for the current token.
+Unlike transformers, where attention looks at every step of the sequence, the Mamba models have concept of memory at every step that tries to use whatever information is relevant from the past and foreget whatever is not for the current token.
 
 A user commented that:
 
@@ -134,12 +134,4 @@ After reading the Mamba paper, attention feels like a hack to avoid engineering 
 
 Paper: https://arxiv.org/pdf/2312.00752.pdf
 
-
-
-
-
-
-
-
-
-
+This blog has a great visual guide to Mamba (and even State Space Models): https://maartengrootendorst.substack.com?utm_source=navbar&utm_medium=web
