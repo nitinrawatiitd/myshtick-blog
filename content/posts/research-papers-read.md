@@ -135,3 +135,13 @@ After reading the Mamba paper, attention feels like a hack to avoid engineering 
 Paper: https://arxiv.org/pdf/2312.00752.pdf
 
 This blog has a great visual guide to Mamba (and even State Space Models): https://maartengrootendorst.substack.com?utm_source=navbar&utm_medium=web
+
+## The Era of 1-bit LLMs: All Large Language Models are in 1.58 Bits
+
+This paper from Microsoft introduces us to concept of training models using 1.58 bits, which drastically reduces the model size and increases the inference time. Why 1.58? Well, in the weights instead of using FP16 values like, 2.1745 etc, it uses ternary values [-1,0,1]. To represent these 3 values you need $log_2(3)$ bits, which is 1.58. 
+
+So the quantisation happens while training the model itself and hence this is different from post training quantised models that have flooded the space of small sized models. Using ternary of [-1,0,1] also reduces the multiplication+addition operations in traditional linear layer with just addition operations (including subtraction for -1). So custom harware can take advantage of this to make inference even faster.
+
+Checkout this video to see some details around the paper - https://www.youtube.com/watch?v=wCDGiys-nLA
+
+The paper has comparisons on llama, for upto 3B parameters. But there are no open source models currently available in the open source community for testing. The future looks promising, specially for hosting these 1.58 Bit models on smaller GPUs or even CPUs, without the greate costs and low latencies. Seems perfect also for edge devices.
