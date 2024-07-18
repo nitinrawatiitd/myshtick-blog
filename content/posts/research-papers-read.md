@@ -145,3 +145,13 @@ So the quantisation happens while training the model itself and hence this is di
 Checkout this video to see some details around the paper - https://www.youtube.com/watch?v=wCDGiys-nLA
 
 The paper has comparisons on llama, for upto 3B parameters. But there are no open source models currently available in the open source community for testing. The future looks promising, specially for hosting these 1.58 Bit models on smaller GPUs or even CPUs, without the greate costs and low latencies. Seems perfect also for edge devices.
+
+## Chameleon: Mixed-Modal Early-Fusion Foundation Models
+
+A paper from meta AI that introduces `mixed-modal` models, which unlike the multi modal models handle the modalities differently. They are trained on interleaved, hence the term mix, where text and image can occur in any order. This is a more general purpose approach to handle text and image.
+
+Only paper and no code or model released yet. Supposed to come in 2 sizes, 7B and 34B. Benchmarks reveal that it already surpasses llama 2 and is close to the mistral/mixtral models on text only tasks. For mix modality tasks they have created their own way of benchmarking mix of text and image generation. They compared to Gemini Pro and GPT-4V, after augmenting them for image generation (as they support multi modal input but only text output), by prompting them to generate image captions wherever image was required and then generating images with Dall-E 3. Chameleon was more preferred on human evaluation than Gemeni Pro + and GPT-4V, much larger models compared to it.
+
+One interesting approach is the image tokenisation, which basically relies on a codebook (vector respresentation of image tokens) of 8192. So essentially 8192 tokens representing all possible images. This is along with 65,536 vocab for text data.
+
+To do: Read more about image tokenisation using codebooks. Chameleon uses image tokeniser fomr this paper - Make-a-scene: Scene-based text-to-image generation with human priors
